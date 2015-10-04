@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="restaurant">Restaurants Nearby!</string>
+    <string name="app_name">Restaurants Nearby!</string>
+    <string name="consumer_key">h3BXImGHjnBiI4HiF_hxpw</string>
+    <string name="consumer_secret">W4aU_Yk5lxt23kY4MmvZdCfXszY</string>
+    <string name="token">zBj1fCVKEeufhA00HgYtUsZoybwdkEqv</string>
+    <string name="token_secret">ijfr6eI6WT0Ea3XiNMgAC5gzv2w</string>
+    
+    <string name="latitude_label">Latitude: </string>
+    <string name="longitude_label">Longitude: </string>
+
+    <string name="start_updates">Start updates</string>
+    <string name="stop_updates">Stop updates</string>
+
+    <string name="last_update_time_label">Last location update time: </string>
+
+    <string name="location_updated_message">Location updated</string>
+</resources>
