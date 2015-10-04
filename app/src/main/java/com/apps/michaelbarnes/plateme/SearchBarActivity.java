@@ -126,7 +126,6 @@ public class SearchBarActivity extends Activity implements
         // API.
         buildGoogleApiClient();
         mGoogleApiClient.connect();
-        Singleton.getInstance().setApi(mGoogleApiClient);
         
 
 	}
