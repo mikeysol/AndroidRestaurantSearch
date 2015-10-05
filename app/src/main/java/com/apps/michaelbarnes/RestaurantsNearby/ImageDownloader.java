@@ -1,4 +1,4 @@
-package com.apps.michaelbarnes.plateme;
+package com.apps.michaelbarnes.RestaurantsNearby;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

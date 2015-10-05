@@ -1,4 +1,4 @@
-package com.apps.michaelbarnes.plateme;
+package com.apps.michaelbarnes.RestaurantsNearby;
 import org.scribe.model.Token;
 import org.scribe.builder.api.DefaultApi10a;
 

@@ -22,7 +22,7 @@
  * @author: michael barnes
  * */
 
-package com.apps.michaelbarnes.plateme;
+package com.apps.michaelbarnes.RestaurantsNearby;
 
 import android.app.ListActivity;
 import android.content.Intent;

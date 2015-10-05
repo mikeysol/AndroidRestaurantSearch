@@ -15,7 +15,7 @@
  * 
  * @author: michael barnes
  * */
-package com.apps.michaelbarnes.plateme;
+package com.apps.michaelbarnes.RestaurantsNearby;
 
 import android.app.Activity;
 import android.content.Context;
@@ -46,7 +46,7 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
     inflater = act.getLayoutInflater();
     this.context = (Context) act;
   }
-  
+
   static class ViewHolder{//Used to cache data in child view to speed up performance
 	  protected TextView firstLine;
 	  protected TextView secondLine;
@@ -68,45 +68,45 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
   @Override
   public View getChildView(int groupPosition, final int childPosition,
       boolean isLastChild, View convertView, ViewGroup parent) {
-	  
+
 	  final int parentPos = groupPosition;
 	  ViewHolder vh;
-	    
+
 	    if (convertView == null) {//converView recycles and reuses its view and so we only need to inflate the layout once per group
 		      convertView = inflater.inflate(R.layout.rowlayout, null);
-		      
+
 		      vh = new ViewHolder();
-		      
+
 		      vh.icon = (ImageView) convertView.findViewById(R.id.icon);//restaurant image
 			  vh.firstLine = (TextView) convertView.findViewById(R.id.firstLine);//restaurant url
 			  vh.secondLine = (TextView) convertView.findViewById(R.id.secondLine);//restaurant address
 			  vh.thirdLine = (TextView) convertView.findViewById(R.id.thirdLine);//restaurant phone number
 			  vh.rBar = (RatingBar) convertView.findViewById(R.id.ratingBar1);//restaurant rating
-			  
+
 			  convertView.setTag(vh);
-			  
+
 		    }else{//get the recycled view
 		    	vh = (ViewHolder) convertView.getTag();
 		    }
-	    
-		  
-		  
+
+
+
 		  new ImageDownloader(vh.icon).execute((String)getChild(groupPosition, 1));//AsyncTask to download image at URL
 		  vh.firstLine.setText((String) getChild(groupPosition, 0));
 		  String address ="";
 		  ArrayList<String> fields = (ArrayList<String>) getChild(groupPosition, 5);//a list of strings are returned for address so we need to concat to one line
 		  for(int i=0; i<fields.size(); i++){
-			  
+
 			  address += fields.get(i);
 			  if(i!=(fields.size()-1)){
-				address += ", ";  
+				address += ", ";
 			  }
 		  }
 		  vh.secondLine.setText(address);
 		  vh.thirdLine.setText((String) getChild(groupPosition, 4));
 		  vh.rBar.setRating(((Double) getChild(groupPosition, 2)).floatValue());
-		  
-		  
+
+
 		  //Listeners
 		  vh.icon.setOnClickListener(new View.OnClickListener() {
 		      @Override
@@ -115,14 +115,14 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
                           Toast.LENGTH_SHORT).show();
 		    	  }
 		    	  });
-		  
+
 		  vh.firstLine.setOnClickListener(new View.OnClickListener() {
 		      @Override
 		      public void onClick(View v) {//Starts an intent to open a web browser to go to Yelp Restaurant page
 		    	  activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse((String) getChild(parentPos, 0))));
 		    	  }
 		    	  });
-		  
+
 		  vh.secondLine.setOnClickListener(new View.OnClickListener() {
 		      @Override
 		      public void onClick(View v) {//Starts an intent to launch the Google Maps app to navigate to restaurant location
@@ -135,7 +135,7 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
 		    	  Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
 		    	  // Make the Intent explicit by setting the Google Maps package
 		    	  mapIntent.setPackage("com.google.android.apps.maps");
-		    	  
+
 		    	  if (mapIntent.resolveActivity(activity.getPackageManager()) != null) {
 
 		    	  // Attempt to start an activity that can handle the Intent
@@ -143,15 +143,15 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
 		    	  }
 		    	  }
 		    	  });
-		  
+
 		  vh.thirdLine.setOnClickListener(new View.OnClickListener() {
 		      @Override
 		      public void onClick(View v) {//Starts an intent to call restaurant phone number
 		    	  String phone = (String)getChild(parentPos, 4);
 		    	  Toast.makeText(activity, phone,
 		  	            Toast.LENGTH_SHORT).show();
-		    	  Intent callIntent = new Intent(Intent.ACTION_CALL);          
-		            callIntent.setData(Uri.parse("tel:"+phone));          
+		    	  Intent callIntent = new Intent(Intent.ACTION_CALL);
+		            callIntent.setData(Uri.parse("tel:"+phone));
 		            activity.startActivity(callIntent);
 		    	  }
 		    	  });

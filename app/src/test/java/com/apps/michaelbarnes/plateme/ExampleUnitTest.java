@@ -1,4 +1,4 @@
-package com.apps.michaelbarnes.plateme;
+package com.apps.michaelbarnes.RestaurantsNearby;
 
 import org.junit.Test;
 
