@@ -4,20 +4,19 @@
  * 
  * onCreate()
  * 		initialize the UI screen to be seen defined in res/search_results.xml
- * 		get a reference to the Google Api so we can reuse its Location Service data else reuse previous Android Location service
  * 		get search parameter data stored in the Intent invoked by SearchBarActivity.java
  * 		set the View to not be visible
  * 		start communicating with Yelp Search Api with a new instance of YelpQuery.java that will execute the query Asynchronously
  * 		YelpQuery will launch an adapter to handle the data we retrieve and apply it to our view 
  * 		 
  * onStart()
- * 		start location listeners the same as in SearchBarActivity.java
+ * 		super implementation
  * onResume()
- * 		start location listeners the same as in SearchBarActivity.java
+ * 		super implementation
  * onPause()
- * 		suspend location listeners the same as in SearchBarActivity.java
+ * 		super implementation
  * onStop()
- * 		stop location listeners the same as in SearchBarActivity.java
+ * 		super implementation
  * 
  * @author: michael barnes
  * */
