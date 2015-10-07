@@ -31,7 +31,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class YelpQuery extends AsyncTask<String, Void, List<Business>> {
+class YelpQuery extends AsyncTask<String, Void, List<Business>> {
 	
 	Context activity;
 	

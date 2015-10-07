@@ -1,8 +1,8 @@
-/*	YelpSearchListActivity.java is the second activity of the Nearby Restaurants application and follows SearchBarActivity.
+/*	SearchListFragment.java is a list fragment hosted by SearchResutlsActivity the second activity of the Nearby Restaurants application following SearchBarActivity.
  * 
  * The life cycle of this activity is as follows:
  * 
- * onCreate()
+ * onCreateView()
  * 		initialize the UI screen to be seen defined in res/search_results.xml
  * 		get search parameter data stored in the Intent invoked by SearchBarActivity.java
  * 		set the View to not be visible
@@ -23,35 +23,35 @@
 
 package com.apps.michaelbarnes.RestaurantsNearby;
 
-import android.app.ListActivity;
+import android.app.ListFragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Window;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
-public class YelpSearchListActivity extends ListActivity {
+public class SearchListFragment extends ListFragment {
 
 	
-	@Override
-    public void onCreate(Bundle savedInstanceState) {
-		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-        super.onCreate(savedInstanceState);
-        setTitle("Searching Nearby...");
-		setContentView(R.layout.search_results);
-		
-        Intent intent = getIntent();
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.search_results, null);
+
+        Intent intent = this.getActivity().getIntent();
         final String searchTerm = "restaurants "+intent.getStringArrayExtra("query")[0];
         final String latitude = intent.getStringArrayExtra("query")[1];
         final String longitude = intent.getStringArrayExtra("query")[2];
         final String radius = intent.getStringArrayExtra("query")[3];
-        
-        setProgressBarIndeterminateVisibility(true);
-        
-        new YelpQuery(YelpSearchListActivity.this).execute(searchTerm, latitude, longitude, radius);
-        
+
+        this.getActivity().setProgressBarIndeterminateVisibility(true);
+
+        new YelpQuery(SearchListFragment.this.getActivity()).execute(searchTerm, latitude, longitude, radius);
+        return v;
     }
 
 @Override
-protected void onStart() {
+public void onStart() {
     super.onStart();
 
 }
@@ -63,13 +63,13 @@ public void onResume() {
 }
 
 @Override
-protected void onPause() {
+public void onPause() {
     super.onPause();
 
 }
 
 @Override
-protected void onStop() {
+public void onStop() {
     super.onStop();
 }
 

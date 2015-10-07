@@ -6,19 +6,19 @@
  * 		initialize the first UI screen to be seen defined in res/search_layout.xml
  * 		set UI widgets for the search field and radius seekbar
  * 		build Google Api Client for Google Play Location Service
- * 		connect Api with connect() that will trigger ConnectionCallbacks: onConnected(Bundle connectionHint), onConnectionSuspended(int cause)
+ * 		when client is connected it will trigger ConnectionCallbacks: onConnected(Bundle connectionHint), onConnectionSuspended(int cause)
  * 
  * onStart()
- * 		Check if Google Api Client isConnected() determined by OnConnectionFailedListener: onConnectionFailed(ConnectionResult result)
- * 		Else use Android Location Service
+ *      connect GoogleApiClient
+ *
  * 
  * onResume()
  * 		same as onStart()
  * 		While in this state: 
- * 			implement Android LocationListener or Google Play LocationListener
+ * 			implement Google Play LocationListener
  * 			wait for click of Search button to invoke search(View v) by button attribute android:onClick="search" in res/search_layout.xml
  * 			search(View v)
- * 				start new Intent of YelpSearchListActivity.java with search parameters gathered from UI
+ * 				start new Intent of SearchResults.java with search parameters gathered from UI
  * 
  * onPause()
  * 		suspend listening to location updates
@@ -125,7 +125,6 @@ public class SearchBarActivity extends Activity implements
         // Kick off the process of building a GoogleApiClient and requesting the LocationServices
         // API.
         buildGoogleApiClient();
-        mGoogleApiClient.connect();
         
 
 	}
@@ -144,7 +143,7 @@ public class SearchBarActivity extends Activity implements
 			String Radius = String.valueOf(radiusAdjustment);
 			
 			//Setting up Intent to take us to the next Activity
-			Intent intent = new Intent(this, YelpSearchListActivity.class);
+			Intent intent = new Intent(this, SearchResultsActivity.class);
 			intent.putExtra("query",new String[]{term, latitude, longitude, Radius});
 			intent.putExtra("location", mCurrentLocation);
 			startActivity(intent);
